@@ -61,7 +61,7 @@ $(document).on("ready", function(){
   phrase = new SplitText("I like turd sandwhiches", "char", "body", "p");
 
   $("button").on("click", makeNewPhrase);
-  $("#form").on("submit", makeNewPhrase);
+  $("#form").on("submit", makeNewPhrase); //form submission isn't working i.e. hitting enter.
   var field1 = $("#phrase");
   var field2 = $("#grouping");
   function makeNewPhrase(evt){
