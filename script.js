@@ -8,6 +8,7 @@ function SplitText(text, splitType, appendDestination, tagType){
   this.splitByType();
   this.makeHTML();
   this.appendHTML();
+  this.animate();
 }
 SplitText.prototype.splitByType = function(){
   if(this.splitType == "char"){
@@ -52,11 +53,19 @@ SplitText.prototype.makeHTML = function(){
 SplitText.prototype.appendHTML = function(){
   $(this.appendDestination).append("<"+this.tagType+">"+this.newText+"</"+this.tagType+">");
 }
+SplitText.prototype.animate = function(){
+  TweenMax.staggerFrom(".splitText", .8, {opacity:0, rotation:-180, y:-100, ease:Back.easeOut}, .08)
+}
 
 $(document).on("ready", function(){
-
-
   phrase = new SplitText("I like turd sandwhiches", "char", "body", "p");
-  TweenMax.staggerFrom(".splitText", .8, {opacity:0, rotation:-180, y:-100, ease:Back.easeOut}, .08)
 
+  $("button").on("click", makeNewPhrase);
+  $("#form").on("submit", makeNewPhrase);
+  var field1 = $("#phrase");
+  var field2 = $("#grouping");
+  function makeNewPhrase(evt){
+    evt.preventDefault();
+    genPhrase = new SplitText(field1.val(), field2.val(), "body", "p");
+  }
 })
